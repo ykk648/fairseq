@@ -1148,14 +1148,14 @@ class TransformerEncoder(nn.Module):
         x = x.transpose(0, 1)
 
         # undo paddding
-        if pad_length > 0:
-            x = x[:, :-pad_length]
+        if True:
+            x = x[:, :x.shape[1] - pad_length]
 
             def undo_pad(a, b, c):
                 return (
-                    a[:-pad_length],
-                    b[:-pad_length] if b is not None else b,
-                    c[:-pad_length],
+                    a[:a.shape[0] - pad_length],
+                    b[:b.shape[0] - pad_length] if b is not None else b,
+                    c[:c.shape[0] - pad_length],
                 )
 
             layer_results = [undo_pad(*u) for u in layer_results]

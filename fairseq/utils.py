@@ -741,7 +741,8 @@ def index_put(tensor, indices, value):
             indices = indices.expand_as(tensor)
         tensor = torch.mul(tensor, ~indices) + torch.mul(value, indices)
     else:
-        tensor[indices] = value
+        # tensor[indices] = value
+        tensor[0][indices[0]] = value
     return tensor
 
 
